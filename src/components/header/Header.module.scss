@@ -1,0 +1,39 @@
+.header {
+  width: 100%;
+  background-color: rgb(135 135 245 / 72%);
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    max-width: 1144px;
+    padding: 8px 32px;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding: 10px 100px;
+    max-width: 1720px;
+    margin: 0 auto;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  margin-right: 8px;
+}
+
+.homeNav {
+  font-weight: 700;
+  font-size: 20px;
+  color: #4242c9;
+}
