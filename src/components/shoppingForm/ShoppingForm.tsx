@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { emailRegexp, nameRegexp } from "../../constants/validation";
 import styles from "./ShoppingForm.module.scss";
