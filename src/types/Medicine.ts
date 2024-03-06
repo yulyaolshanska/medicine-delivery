@@ -1,5 +1,7 @@
 export interface Medicine {
-  id: string;
+  _id: string;
   name: string;
   price: number;
+  description: string;
+  picture: string;
 }
