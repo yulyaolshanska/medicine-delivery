@@ -1,9 +1,6 @@
-import {
-  CartItem,
-  removeFromCart,
-  updateQuantity,
-} from "../../redux/CartSlice";
+import { removeFromCart, updateQuantity } from "../../redux/CartSlice";
 import { useAppDispatch } from "../../redux/store";
+import { CartItem } from "../../types/cartItem";
 import styles from "./ShoppingCard.module.scss";
 
 interface ShoppingCardProps {

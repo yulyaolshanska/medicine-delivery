@@ -8,13 +8,6 @@ import styles from "./ShoppingCardPage.module.scss";
 const ShoppingCartPage: React.FC = () => {
   const cartMedicines = useSelector((state: RootState) => state.cart.medicines);
 
-  const handleSubmitOrder = async () => {
-    try {
-    } catch (error) {
-      console.error("Error submitting order:", error);
-    }
-  };
-
   const getTotalPrice = () => {
     return cartMedicines.reduce(
       (total, { price, quantity }) => total + price * quantity,
@@ -24,11 +17,11 @@ const ShoppingCartPage: React.FC = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <ShoppingForm handleSubmitOrder={handleSubmitOrder} />
+      <ShoppingForm cartProducts={cartMedicines} />
       <div>
         <ul className={styles.medicineList}>
           {cartMedicines.map((medicine) => (
-            <ShoppingCard medicine={medicine} />
+            <ShoppingCard key={medicine._id} medicine={medicine} />
           ))}
         </ul>
         <p className={styles.totalPrice}> Total price: {getTotalPrice()} </p>

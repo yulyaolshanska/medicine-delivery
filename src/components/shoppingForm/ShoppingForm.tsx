@@ -1,30 +1,55 @@
 import { useForm } from "react-hook-form";
+import { BASE_URL } from "../../constants/other";
 import { emailRegexp, nameRegexp } from "../../constants/validation";
+import { resetOrder } from "../../redux/CartSlice";
+import { useAppDispatch } from "../../redux/store";
+import { CartItem } from "../../types/cartItem";
+import { FormData } from "../../types/formData";
 import styles from "./ShoppingForm.module.scss";
 
 interface ShoppingFormProps {
-  handleSubmitOrder: () => void;
+  cartProducts: CartItem[];
 }
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-}
-
-const ShoppingForm: React.FC<ShoppingFormProps> = ({ handleSubmitOrder }) => {
+const ShoppingForm: React.FC<ShoppingFormProps> = ({ cartProducts }) => {
+  const dispatch = useAppDispatch();
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors, touchedFields },
   } = useForm<FormData>({
     mode: "onChange",
     shouldUnregister: true,
   });
 
-  const handleSendOrder = async (formData: FormData) => {
-    handleSubmitOrder();
+  const handleSendOrder = async (formData: any) => {
+    try {
+      const res = await fetch(`${BASE_URL}/order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          products: cartProducts,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Failed to send order: ${res.statusText}`);
+      }
+
+      const response = await res.json();
+
+      reset();
+      dispatch(resetOrder());
+
+      return response;
+    } catch (error) {
+      console.error("Error sending order:", error);
+      throw error;
+    }
   };
 
   return (
@@ -182,31 +207,5 @@ const ShoppingForm: React.FC<ShoppingFormProps> = ({ handleSubmitOrder }) => {
     </>
   );
 };
-
-//     <form>
-//       <input
-//         type="email"
-//         placeholder="Email"
-//         value={email}
-//         onChange={(e) => setEmail(e.target.value)}
-//       />
-//       <input
-//         type="text"
-//         placeholder="Phone Number"
-//         value={phoneNumber}
-//         onChange={(e) => setPhoneNumber(e.target.value)}
-//       />
-//       <input
-//         type="text"
-//         placeholder="Address"
-//         value={address}
-//         onChange={(e) => setAddress(e.target.value)}
-//       />
-//       <button type="submit" onClick={handleSubmitOrder}>
-//         Submit Order
-//       </button>
-//     </form>
-//   );
-// };
 
 export default ShoppingForm;

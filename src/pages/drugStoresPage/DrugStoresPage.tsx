@@ -7,6 +7,7 @@ import styles from "./DrugStoresPage.module.scss";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/CartSlice";
 import ShopList from "../../components/shopList/ShopList";
+import { BASE_URL } from "../../constants/other";
 
 const DrugStoresPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -22,15 +23,11 @@ const DrugStoresPage: React.FC = () => {
   useEffect(() => {
     const fetchDrugStores = async () => {
       try {
-        const response = await axios.get(
-          "https://medicine-delivery-backend.vercel.app/api/drugStores"
-          // "http://localhost:5001/api/drugStores"
-        );
+        const response = await axios.get(`${BASE_URL}/drugStores`);
         setDrugStores(response.data);
         const firstStoreId = response.data[0]._id;
         const medicineResp = await axios.get(
-          `https://medicine-delivery-backend.vercel.app/api/drugStores/${firstStoreId}/medicines`
-          // `http://localhost:5001/api/drugStores/${storeId}/medicines`
+          `${BASE_URL}/drugStores/${firstStoreId}/medicines`
         );
         setSelectedMedicines(medicineResp.data.data.result);
       } catch (error) {
@@ -44,8 +41,7 @@ const DrugStoresPage: React.FC = () => {
   const handleStoreClick = async (storeId: string) => {
     try {
       const response = await axios.get(
-        `https://medicine-delivery-backend.vercel.app/api/drugStores/${storeId}/medicines`
-        // `http://localhost:5001/api/drugStores/${storeId}/medicines`
+        `${BASE_URL}/drugStores/${storeId}/medicines`
       );
       setSelectedMedicines(response.data.data.result);
     } catch (error) {
