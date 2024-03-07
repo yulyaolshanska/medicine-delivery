@@ -1,6 +1,6 @@
 # Medicine Delivery 24h
 
-## [Click to view website](https://medicine-delivery-24h.netlify.app//)
+## [Click to view website](https://medicine-delivery-24h.netlify.app)
 
 ### Installation
 
