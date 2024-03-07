@@ -6,10 +6,10 @@
 
 1. Clone the repository:
 
-   ```code
-   git clone https://github.com/yulyaolshanska/medicine-delivery.git
+ ```code
+ git clone https://github.com/yulyaolshanska/medicine-delivery.git
 
-   ```
+  ```
 
 2. Install the basic project dependencies
 
@@ -31,6 +31,11 @@ npm start
 - [Axios]
 - [module scss]
 - [Sass]
+
+  <img width="600" alt="image" src="https://github.com/yulyaolshanska/medicine-delivery/assets/63751946/d4319ba0-42d3-40ed-ad3e-7b5d8c6304b5">
+  <img width="800" alt="image" src="https://github.com/yulyaolshanska/medicine-delivery/assets/63751946/ac480f19-2acc-44fc-a63c-fd8658306d28">
+
+
 
 ## Description:
 
