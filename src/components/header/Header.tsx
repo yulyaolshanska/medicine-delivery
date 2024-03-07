@@ -6,14 +6,14 @@ const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
-        <div className={styles.container}>
+        <nav className={styles.container}>
           <p className={styles.homeNav}>
             <NavLink to="/">Shop</NavLink>
           </p>
-          <button>
-            <Link to={"/shopping-card"}>Shopping cart</Link>
-          </button>
-        </div>
+          <p className={styles.homeNav}>
+            <NavLink to="/shopping-card">Shopping cart</NavLink>
+          </p>
+        </nav>
       </div>
     </header>
   );

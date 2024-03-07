@@ -1,6 +1,7 @@
 .header {
   width: 100%;
-  background-color: rgb(135 135 245 / 72%);
+  background-color: #2e435f;
+  padding: 10px;
 }
 
 .headerContainer {
@@ -34,6 +35,20 @@
 
 .homeNav {
   font-weight: 700;
-  font-size: 20px;
-  color: #4242c9;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+
+  &:not(:last-child) {
+    margin-right: 20px;
+
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 20px;
+      margin-left: 20px;
+      background-color: #e4e4e4;
+    }
+  }
 }
