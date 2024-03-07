@@ -26,7 +26,7 @@ const MedicineCard: React.FC<MedicineCardProps> = ({
         <img
           className={styles.picture}
           src={medicine.picture}
-          alt={`Picture of ${medicine.name}`}
+          alt={medicine.name}
         />
       </div>
       <p className={styles.info}>{medicine.name}</p>

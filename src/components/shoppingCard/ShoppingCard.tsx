@@ -30,11 +30,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ medicine }) => {
     <>
       <li key={_id} className={styles.card}>
         <div className={styles.pictureBox}>
-          <img
-            className={styles.picture}
-            src={picture}
-            alt={`Picture of ${name}`}
-          />
+          <img className={styles.picture} src={picture} alt={medicine.name} />
         </div>
         <div className={styles.infoContainer}>
           <div>
