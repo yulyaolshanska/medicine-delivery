@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 import { Medicine } from "../../types/Medicine";
 import styles from "./MedicineCard.module.scss";
 
@@ -11,6 +13,9 @@ const MedicineCard: React.FC<MedicineCardProps> = ({
   medicine,
   onAddToCart,
 }) => {
+  const cartMedicines = useSelector((state: RootState) => state.cart.medicines);
+  const isAddedToCart = cartMedicines.some((item) => item._id === medicine._id);
+
   const handleAddToCart = () => {
     onAddToCart(medicine);
   };
@@ -24,9 +29,11 @@ const MedicineCard: React.FC<MedicineCardProps> = ({
           alt={`Picture of ${medicine.name}`}
         />
       </div>
-      <p>Name: {medicine.name}</p>
-      <p>Price: ${medicine.price.toFixed(2)}</p>
-      <button onClick={handleAddToCart}>Add to Cart</button>
+      <p className={styles.info}>{medicine.name}</p>
+      <p className={styles.info}>${medicine.price.toFixed(2)}</p>
+      <button className={styles.addBtn} onClick={handleAddToCart}>
+        {isAddedToCart ? "Added" : "Add to Cart"}
+      </button>
     </li>
   );
 };
