@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BASE_URL } from "../../constants/other";
 import { emailRegexp, nameRegexp } from "../../constants/validation";
@@ -5,6 +6,7 @@ import { resetOrder } from "../../redux/CartSlice";
 import { useAppDispatch } from "../../redux/store";
 import { CartItem } from "../../types/cartItem";
 import { FormData } from "../../types/formData";
+import FormModal from "../formModal/FormModal";
 import styles from "./ShoppingForm.module.scss";
 
 interface ShoppingFormProps {
@@ -13,6 +15,8 @@ interface ShoppingFormProps {
 
 const ShoppingForm: React.FC<ShoppingFormProps> = ({ cartProducts }) => {
   const dispatch = useAppDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [isServerError, setIsServerError] = useState(false);
   const {
     handleSubmit,
     register,
@@ -25,6 +29,10 @@ const ShoppingForm: React.FC<ShoppingFormProps> = ({ cartProducts }) => {
 
   const handleSendOrder = async (formData: any) => {
     try {
+      if (cartProducts.length === 0) {
+        return;
+      }
+
       const res = await fetch(`${BASE_URL}/order`, {
         method: "POST",
         headers: {
@@ -37,11 +45,13 @@ const ShoppingForm: React.FC<ShoppingFormProps> = ({ cartProducts }) => {
       });
 
       if (!res.ok) {
+        setIsServerError(true);
         throw new Error(`Failed to send order: ${res.statusText}`);
       }
 
       const response = await res.json();
 
+      setShowModal(true);
       reset();
       dispatch(resetOrder());
 
@@ -204,6 +214,12 @@ const ShoppingForm: React.FC<ShoppingFormProps> = ({ cartProducts }) => {
           </button>
         </form>
       </div>
+      {showModal && (
+        <FormModal
+          onClick={() => setShowModal(false)}
+          isError={isServerError}
+        />
+      )}
     </>
   );
 };
