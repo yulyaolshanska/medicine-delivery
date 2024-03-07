@@ -30,7 +30,7 @@ const ShoppingCartPage: React.FC = () => {
           )}
         </ul>
 
-        <p className={styles.totalPrice}> Total price: {getTotalPrice()} </p>
+        <p className={styles.totalPrice}> Total price: {getTotalPrice()} $ </p>
       </div>
     </div>
   );

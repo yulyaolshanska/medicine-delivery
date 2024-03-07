@@ -32,7 +32,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ medicine }) => {
         <div className={styles.infoContainer}>
           <div>
             <p className={styles.info}>{name}</p>
-            <p className={styles.info}>Price:{price * quantity}</p>
+            <p className={styles.info}>Price: {price * quantity}</p>
           </div>
           <div className={styles.quantityCounter}>
             <button
