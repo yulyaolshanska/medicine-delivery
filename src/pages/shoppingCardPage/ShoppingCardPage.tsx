@@ -23,7 +23,13 @@ const ShoppingCartPage: React.FC = () => {
           {cartMedicines.map((medicine) => (
             <ShoppingCard key={medicine._id} medicine={medicine} />
           ))}
+          {cartMedicines.length === 0 && (
+            <p className={styles.emptyCart}>
+              There is nothing in your shopping cart yet.
+            </p>
+          )}
         </ul>
+
         <p className={styles.totalPrice}> Total price: {getTotalPrice()} </p>
       </div>
     </div>
