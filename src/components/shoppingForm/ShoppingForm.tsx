@@ -24,7 +24,7 @@ const ShoppingForm: React.FC<ShoppingFormProps> = ({ handleSubmitOrder }) => {
     shouldUnregister: true,
   });
 
-  const handleAddMember = async (formData: FormData) => {
+  const handleSendOrder = async (formData: FormData) => {
     // try {
     //     const resp = await FetchService.fetchAddMember(formData);
     //     if (!resp?.ok) {
@@ -43,8 +43,9 @@ const ShoppingForm: React.FC<ShoppingFormProps> = ({ handleSubmitOrder }) => {
 
   return (
     <>
-      <div className={styles.formContainer} id="addMemberForm">
-        <form className={styles.form} onSubmit={handleSubmit(handleAddMember)}>
+      <div className={styles.formContainer}>
+        <h2 className={styles.formTitle}>Customer Information</h2>
+        <form className={styles.form} onSubmit={handleSubmit(handleSendOrder)}>
           <ul>
             <li className={styles.inputContainer}>
               <label className={styles.label} htmlFor="name">
@@ -132,16 +133,12 @@ const ShoppingForm: React.FC<ShoppingFormProps> = ({ handleSubmitOrder }) => {
                     value: true,
                     message: "Field is required",
                   },
-                  pattern: {
-                    value: emailRegexp,
-                    message: "Enter valid phone number",
-                  },
                   minLength: {
                     value: 5,
                     message: "Phone number too short",
                   },
                   maxLength: {
-                    value: 254,
+                    value: 15,
                     message: "Phone number too long",
                   },
                 })}
@@ -191,12 +188,7 @@ const ShoppingForm: React.FC<ShoppingFormProps> = ({ handleSubmitOrder }) => {
             </li>
           </ul>
 
-          <button
-            type={"submit"}
-            // variant={'formBtn'}
-
-            // isDisabled={!isValid}
-          >
+          <button className={styles.submitBtn} type={"submit"}>
             Submit
           </button>
         </form>
