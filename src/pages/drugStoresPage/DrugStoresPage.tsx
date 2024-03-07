@@ -6,6 +6,7 @@ import { Medicine } from "../../types/Medicine";
 import styles from "./DrugStoresPage.module.scss";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/CartSlice";
+import ShopList from "../../components/shopList/ShopList";
 
 const DrugStoresPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,12 @@ const DrugStoresPage: React.FC = () => {
           // "http://localhost:5001/api/drugStores"
         );
         setDrugStores(response.data);
+        const firstStoreId = response.data[0]._id;
+        const medicineResp = await axios.get(
+          `https://medicine-delivery-backend.vercel.app/api/drugStores/${firstStoreId}/medicines`
+          // `http://localhost:5001/api/drugStores/${storeId}/medicines`
+        );
+        setSelectedMedicines(medicineResp.data.data.result);
       } catch (error) {
         console.error("Error fetching drug stores:", error);
       }
@@ -47,17 +54,12 @@ const DrugStoresPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Drug Stores</h1>
-      {drugStores.map((store) => (
-        <div key={store._id} onClick={() => handleStoreClick(store._id)}>
-          <h2>{store.name}</h2>
-        </div>
-      ))}
-
+    <div className={styles.pageContainer}>
+      <ShopList drugStores={drugStores} handleStoreClick={handleStoreClick} />
       <ul className={styles.medicineList}>
         {selectedMedicines.map((medicine) => (
           <MedicineCard
+            key={medicine._id}
             medicine={medicine}
             onAddToCart={() => handleAddToCart(medicine)}
           />
