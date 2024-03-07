@@ -17,28 +17,14 @@ const ShoppingForm: React.FC<ShoppingFormProps> = ({ handleSubmitOrder }) => {
   const {
     handleSubmit,
     register,
-    reset,
-    formState: { isValid, errors, touchedFields },
+    formState: { errors, touchedFields },
   } = useForm<FormData>({
     mode: "onChange",
     shouldUnregister: true,
   });
 
   const handleSendOrder = async (formData: FormData) => {
-    // try {
-    //     const resp = await FetchService.fetchAddMember(formData);
-    //     if (!resp?.ok) {
-    //         setIsServerError(true);
-    //         setShowModal(true);
-    //         const errorMessage = await resp?.text();
-    //         throw new Error(errorMessage);
-    //     }
-    //     setIsServerError(false);
-    //     setShowModal(true);
-    //     reset();
-    // } catch (error) {
-    //     console.log('Something went wrong, please try again');
-    // }
+    handleSubmitOrder();
   };
 
   return (
